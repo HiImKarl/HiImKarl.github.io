@@ -11,6 +11,7 @@ This is a beginner level tutorial for a basic implementation for an AVL tree. I 
 You can download the full source code for the tutorial with git. Open a terminal and run this in the directory you want to put the code:
 ```
 git clone git@github.com:HiImKarl/Learning-Material.git
+cd AVL
 ```
 
 **Prerequisites**: 
@@ -153,7 +154,7 @@ void update_height(Node<T> *node)
 
 ## Rotations
 
-For the left rotation, the left child moves into the place of the head node, inheriting the head as its right child, and the head node inherits the left node's right subtree. Again, these lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University are really helpful if you need to visualize this.
+For the left rotation, the left child moves into the place of the head node, inheriting the head as its right child, and the head node inherits the left node's right subtree. Again, these [lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University are really helpful if you need to visualize this.
 
 The right rotation is identical, except we are moving the right node into place of the head node, which inherits the right node's left subtree.
 ```cpp 
