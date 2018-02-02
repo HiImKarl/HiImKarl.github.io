@@ -5,10 +5,11 @@ title: "Algorithms: AVL Trees -- 2/4"
 
 # Erasing Nodes
 
-If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations.  
+If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just force an addition call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
 
-Finding the node to delete is fairly simple; we need to keep an array of parent pointers similar to ```insert()```. We cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now.
-
+Also, we cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now, but a possible solution would be passing an option boolean pointer that indicates whether the value was found or not.
+ 
+Finding the node to delete is fairly simple; we need to keep an array of parent pointers similar to ```insert()```.
 ```cpp
 template <typename T>
 Node<T> *Erase(Node<T> *root, typename Node<T>::value_type val)
@@ -29,7 +30,7 @@ Node<T> *Erase(Node<T> *root, typename Node<T>::value_type val)
 	//...
 ```
 
-However, what if we are deleting a node in the middle of the tree? Then we need to find a node that we _can_ safely delete and that we can put in the place of the node we want to delete. To do so, we can either move to the left child (if it exists) and move right until there are no more right children, or move to the right and then move all the way to the left. 
+However, what if we are deleting a node in the middle of the tree? Then we need to find a node that we can _safely_ delete and that we can put in the place of the node we want to delete. To do so, we can either move to the left child (if it exists) and move right until there are no more right children, or move to the right and then move all the way to the left. 
 
 This would find the largest node smaller than the node targeted for deletion, or the smallest node larger than the target node, and we can use this to replace the target node. We then delete the node we used to replace the target node instead.
 
@@ -183,7 +184,7 @@ bool IsTreeBalanced(Node<T> *root)
 
 ## Writing Unit Tests
 
-You can look at the unit tests in test.cc. The tests use the [catch framework](https://github.com/catchorg/Catch2). The tests are by no means extensive, and they handle few edge cases, but they are a good start. You can add your own tests and run them with
+You can look at the unit tests in test.cc. They use the [catch framework](https://github.com/catchorg/Catch2). The tests are by no means extensive, but they are a good start. You can add your own tests and run them with:
 ```
 make test
 ./test
@@ -191,4 +192,9 @@ make test
 
 # Issues with our current tree
 
-We would perhaps like to unify our find and erase functions, implement iterators, and perhaps use O(1) memory in insert/find/erase operations. To do this, we will need to add a parent pointer to our node definition. We will do this in [part 3](https://www.google.com/).
+We would perhaps like to, as previously described, unify our find and erase functions, implement iterators, and perhaps use O(1) memory in insert/find/erase operations. We cannot do this with our current tree structure, we will need to be able to traverse up the tree. Let's do that [next](https://www.google.com/).
+
+* [AVL 1](https://www.google.com/)
+* [AVL 2](https://www.google.com/)
+* [AVL 3](https://www.google.com/)
+* [AVL 4](https://www.google.com/)

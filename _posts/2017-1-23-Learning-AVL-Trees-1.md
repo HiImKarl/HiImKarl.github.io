@@ -3,8 +3,6 @@ layout: single
 title: "Algorithms: AVL Trees -- 1/4"
 ---
 
-**Warning**: I am mostly self-taught and fairly novice so it is unlikely that my AVL implementation is optimal. These posts are intended to be a resource for learning.
-
 # Introduction
 This is a beginner level tutorial for a basic implementation for an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
 
@@ -41,7 +39,7 @@ struct Node {
 ```
 For simplicity, we will be storing the height of tree instead of the balance factor. If memory is a concern, it is possible to store the BF using only two bits (though we would still be using a single byte). We define a leaf node's height to be 0.
 
-**Potential Optimization**: The size_t data type is often implemented as unsigned long. Given that the number of nodes is roughly 2<sup>height</sup>, can you imagine how large a tree would need to be to require height in that range?
+**Potential Optimization**: The size\_t data type is often implemented as unsigned long. Given that the number of nodes is roughly 2<sup>height</sup>, can you imagine how large a tree would need to be to require height in that range?
 
 # Tree Height
 
@@ -54,9 +52,27 @@ size_t Height(Node<T> *root)
 }
 ```
 
+# Finding Nodes
+
+Walking through the tree and finding nodes is simple. Since the height of the tree is O(log(n)), this find function takes time O(log(n)). We will return a nullptr if the node cannot be found.
+
+```cpp
+template <typename T>
+Node<T> *Find(Node<T> *root, typename Node<T>::value_type val) 
+{
+	Node<T> *walk = root;
+	while (walk) {
+		if (val == walk->value) break;
+		if (val > walk->value) walk = walk->right;
+		else walk = walk->left;
+	}
+	return walk;
+}
+```
+
 # Tree Insertion
 
-This function is a little bit more complicated. We want to take in a pointer to the root of the tree, as well as a value item to insert. Since the root of the tree may be rotated, it is necessary to return the (possibly different) root of the tree after the insertion.
+This function is a little bit more complicated. We want to take in a pointer to the root of the tree, as well as a value item to insert. Since the root of the tree may be rotated, it is necessary to return the (possibly different) root of the tree after the insertion. This function also takes time equivalent to O(log(n)).
 
 The first thing that we have to do is figure out where the new node should be placed. However, we will also need to keep track of each node we go through to find that place, because we may need to rotate them.
 
@@ -85,7 +101,7 @@ Node<T> *Insert(Node<T> *root, typename Node<T>::value_type val)
 	//...
 ```
 
-We store pointers to the node pointers in the tree (which could be node->left, node->right, or root) since we will have to change their values in the case of rotations. 
+We store pointers to the node pointers in the tree (which could be node-`>`left, node-`>`right, or root) since we will have to change their values in the case of rotations. 
 
 Now, we have to traverse upwards from where we inserted the new node, update the height values, and perform rotations if necessary. We can bundle these two operations into one ```void check_for_rotations(Node<T> **node_ptr)``` function.
 
@@ -185,5 +201,9 @@ void right_left_rotation(Node<T> **head)
 }
 ```
 
-This concludes the first part of the tutorial: Up next, [erasing nodes and verifying our tree works](https://www.google.com/)
+This concludes the first part of the tutorial. Up next, [erasing nodes and verifying our tree works](https://www.google.com/)
 
+* [AVL 1](https://www.google.com/)
+* [AVL 2](https://www.google.com/)
+* [AVL 3](https://www.google.com/)
+* [AVL 4](https://www.google.com/)
