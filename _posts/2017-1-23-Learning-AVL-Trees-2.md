@@ -1,13 +1,13 @@
 ---
 layout: single
-title: "Algorithms: AVL Trees -- 2/4"
+title: "AVL Trees -- 2/4: Erasing Nodes and Verification"
 ---
 
 # Erasing Nodes
 
-If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just force an addition call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
+If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
 
-Also, we cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now, but a possible solution would be passing an option boolean pointer that indicates whether the value was found or not.
+Also, we cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now, but a possible solution would be passing an option boolean reference that indicates whether the value was found or not.
  
 Finding the node to delete is fairly simple; we need to keep an array of parent pointers similar to ```insert()```.
 ```cpp

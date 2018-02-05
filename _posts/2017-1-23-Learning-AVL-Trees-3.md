@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Algorithms: AVL Trees -- 1/4: Allowing Upwards Traversal"
+title: "AVL Trees -- 3/4: Allowing Upwards Traversal"
 ---
 
 # Parent Pointer
@@ -23,7 +23,7 @@ struct Node {
 ```
 
 # Insertion
-Similarly, we no longer need to keep track of the path we traversed to get to the place we are inserting the node. We can define a function that grabs the address of the pointer to the node we are examining.
+We no longer need to keep track of the path we traversed to get to the place we are inserting the node. We can define a function that grabs the address of the pointer to the node we are examining.
 
 ```cpp
 template <typename T>
@@ -60,10 +60,10 @@ Node<T> *Insert(Node<T> *root, typename Node<T>::value_type val)
 }
 ```
 
-Here is the node pointer checking function. Notice that we have to compare the node to it's parent's children pointers, instead of their values, since we can have the case where a node's children has the exact same value as its parent (because of rotations).
+Here is the function that grabs the adress of the pointer to a node, provided that the node is not the root. Notice that we have to compare the node to it's parent's children _pointers_, instead of their values, since we can have the case where a node's children both have the exact same value as its parent (because of rotations).
 
 ```cpp
-// assuming node is not null
+// assuming node is not null and it has a parent
 template <typename T>
 Node<T> **pointer_to_node(Node<T> *node)
 {
@@ -78,9 +78,11 @@ Node<T> **pointer_to_node(Node<T> *node)
 
 As you might imagine, the ```Node<T> Find(typename Node<T>::value_type val)``` remains unchanged. However, we can now pass a pointer to the node we want to erase, allowing us to use ```Node<T> Find(typename Node<T>::value_type val)``` to find a node for the value we want to delete, and verify that it exists, before passing it to erase.
 
+We will define a function called ```void delete_replacement(Node<T> **replacement, Node<T> *dangling_branch)``` to clean up the (replacement) node we are removing. Notice that we have to pass it the dangling branch since it may be the left/right child, depending on which way we walked to find the replacement.
+
 ```cpp
 template <typename T>
-Node<T> *Erase(Node<T> *target) noexcept
+Node<T> *Erase(Node<T> *target) 
 {
 	Node<T> *walk;
 	// find a replacement 
@@ -121,4 +123,23 @@ Node<T> *Erase(Node<T> *target) noexcept
 }
 ```
 
+This is what our ```delete_replacement``` function looks like:
 
+```cpp
+template <typename T>
+void delete_replacement(Node<T> **replacement, Node<T> *dangling_branch)
+{
+	Node<T> **node_ptr = util::pointer_to_node(*replacement);
+	Node<T> *parent = (*replacement)->parent;
+	(*node_ptr) = dangling_branch;
+	if (dangling_branch) dangling_branch->parent = parent;
+	delete (*replacement);
+	*replacement = parent;
+}
+```
+
+# Iteration
+
+# Verification
+
+Since the functionality of the tree is the same, we can use the verification framework that we created in [part2](https://www.google.com), along with additional tests for iteration.

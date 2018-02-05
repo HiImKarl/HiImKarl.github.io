@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Algorithms: AVL Trees -- 1/4"
+title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 ---
 
 # Introduction
