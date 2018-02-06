@@ -202,9 +202,8 @@ void right_left_rotation(Node<T> **head)
 
 # Conclusion
 
-This concludes the first part of the tutorial. Up next, [erasing nodes and verifying our tree works](https://www.google.com/)
+This concludes the first part of the tutorial. Up next, [erasing nodes and verifying our tree works](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 
-* [AVL 1](https://www.google.com/)
-* [AVL 2](https://www.google.com/)
-* [AVL 3](https://www.google.com/)
-* [AVL 4](https://www.google.com/)
+* [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
+* [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
+* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)

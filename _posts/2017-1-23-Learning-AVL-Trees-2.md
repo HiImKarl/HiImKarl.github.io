@@ -192,9 +192,8 @@ make test
 
 # Issues with our current tree
 
-We would perhaps like to, as previously described, unify our find and erase functions, implement iterators, and perhaps use O(1) memory in insert/find/erase operations. We cannot do this with our current tree structure, we will need to be able to traverse up the tree. Let's do that [next](https://www.google.com/).
+We would perhaps like to, as previously described, unify our find and erase functions, implement iterators, and perhaps use O(1) memory in insert/find/erase operations. We cannot do this with our current tree structure, we will need to be able to traverse up the tree. Let's do that [next](https://hiimkarl.github.io//Learning-AVL-Trees-3/).
 
-* [AVL 1](https://www.google.com/)
-* [AVL 2](https://www.google.com/)
-* [AVL 3](https://www.google.com/)
-* [AVL 4](https://www.google.com/)
+* [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
+* [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
+* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)

@@ -290,8 +290,8 @@ However, the runtime of just iterating through the entire tree without performin
 
 # Conclusion
 
-[Next up](), we conclude the series by talking about additional features we can add and we can test how efficient the tree is by performing a benchmark against std::set (this isn't going to go well).
+Next up, we conclude the series by talking about additional features we can add and we can test how efficient the tree is by performing a benchmark against std::set.
 
-* [AVL 1](https://www.google.com/)
-* [AVL 2](https://www.google.com/)
-* [AVL 3](https://www.google.com/)
+* [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
+* [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
+* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
