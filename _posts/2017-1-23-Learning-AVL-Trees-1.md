@@ -4,12 +4,11 @@ title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 ---
 
 # Introduction
-This is a beginner level tutorial for a basic implementation for an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
+This is a beginner level guide for writing a basic implementation of an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
 
 You can download the full source code for the tutorial with git. Open a terminal and run this in the directory you want to put the code:
 ```
-git clone git@github.com:HiImKarl/Learning-Material.git
-cd AVL
+git clone git@github.com:HiImKarl/AVL-Trees.git
 ```
 
 **Prerequisites**: 
@@ -200,6 +199,8 @@ void right_left_rotation(Node<T> **head)
 	left_rotation(head);
 }
 ```
+
+# Conclusion
 
 This concludes the first part of the tutorial. Up next, [erasing nodes and verifying our tree works](https://www.google.com/)
 
