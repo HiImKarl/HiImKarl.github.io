@@ -69,6 +69,8 @@ Here is the results of the ```Find```. This is roughly what we expected if we we
 
 ## Insertion
 
+So this is somewhat unexpected, because our tree is actually faster. It is definitely possible that ```std::set``` adds additional overhead to optimize for iterations, which for most purposes is the most frequent use case of the container. If that is the case, our code will run faster for deletion as well.
+
 ```
 ----------------------------- Insertion ---------------------------
   Number of Nodes   --          AVL           --          STL            
@@ -77,7 +79,6 @@ Here is the results of the ```Find```. This is roughly what we expected if we we
      10000000       --        7.6535s         --        11.719s 
 ```
 
-So this is somewhat unexpected, in that our method is actually faster. Is is definitely possible that ```std::set``` adds additional overhead to optimize for iterations, as that is for most purposes the most frequent use case of the container. I suspect our code will run faster for deletion as well.
 
 ## Deletion
 
@@ -95,7 +96,7 @@ Yep, now the question is just __how much__ faster ```std::set``` will be at iter
 
 Uhhhhhhhhhhhhhhhh nothing to see here.
 
- ``
+```
 ----------------------------- Iteration ---------------------------
   Number of Nodes   --          AVL           --          STL            
        100000       --        0.0036s         --        3.36e-07s
@@ -104,30 +105,29 @@ Uhhhhhhhhhhhhhhhh nothing to see here.
 ```
 ...
 
-Wait, the STL times aren't changing. Is the compiler optimizing something away? When I change the benchmark, to the code below, the results don't change much, and I don't **think** the compiler would optimize this loop away. In fact, the results of STL iteration is so fast, the times are probably smaller than the uncertainity in ```high_resolution_clock```.
+Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much, and I don't **think** the compiler would optimize this loop away. 
 ```cpp
-	// in STL benchmark func
-	volatile ulong sum = 0;
-	auto start = chrono::high_resolution_clock::now();
-	for (;it != stl_set.end(); ++it) { sum += 1; }
-	auto end = chrono::high_resolution_clock::now();
-
+// in STL benchmark func
+volatile ulong sum = 0;
+auto start = chrono::high_resolution_clock::now();
+for (;it != stl_set.end(); ++it) { sum += 1; }
+auto end = chrono::high_resolution_clock::now();
 ```
 
-So what happens when if I time nothing?
+In fact, the results of STL iteration is so fast, the times are probably smaller than the uncertainity with using ```high_resolution_clock```. So what happens if I time nothing?
 ```cpp
-	auto start = chrono::high_resolution_clock::now();
-	auto end = chrono::high_resolution_clock::now();
-	cout <<  chrono::duration<double>(end - start).count() << "s\n";	
+auto start = chrono::high_resolution_clock::now();
+auto end = chrono::high_resolution_clock::now();
+cout <<  chrono::duration<double>(end - start).count() << "s\n";	
 ```
 
 Result: 3.95e-07s
 
-Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even __faster__ than e-7, but I don't know. I'm going to have to look at the disassembly, but not right now, beacuse I'll have to go learn x86 first.
+Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even __faster__ than e-7, but I don't know. I'm going to have to look at the disassembly, but not right now, beacuse I'll have to learn x86 first.
 
 # Conclusion
 
-That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the potential optimizations or modify the design of the tree to make iteration faster. If you think this was actually interesting, leave a comment, and I'll continue implementing random data structures or algorithms. Thanks for reading.
+That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the potential optimizations hinted at throughout the tutorial, or modify the design of the tree to make iteration faster. If you think this was actually interesting, leave a comment, and I'll continue implementing random data structures or algorithms. Thanks for reading.
 
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
