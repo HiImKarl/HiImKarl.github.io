@@ -197,4 +197,4 @@ We would perhaps like to, as previously described, unify our find and erase func
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 * [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
-* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-4/)
+* [AVL 4](https://hiimkarl.github.io//Learning-AVL-Trees-4/)

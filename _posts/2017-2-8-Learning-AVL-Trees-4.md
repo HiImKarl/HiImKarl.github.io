@@ -132,4 +132,4 @@ That's basically it for AVL trees. If you want to challenge yourself, see if you
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 * [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
-* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-4/)
+* [AVL 4](https://hiimkarl.github.io//Learning-AVL-Trees-4/)
