@@ -216,8 +216,8 @@ Here is what the prefix operator looks like:
 template <typename T>
 Iterator<T> &Iterator<T>::operator++()
 {
-	// We can perform a check here for the end iterator (ptr is NULL)
-	// and throw an exception if found
+	// We could perform a check here for the end iterator (ptr is NULL)
+	// and throw an exception 
 	if (ptr->right) {
 		ptr = ptr->right;
 		move_it_leftmost(this);
@@ -271,8 +271,8 @@ The decrement operator does exactly the opposite of what the increment operator 
 template <typename T>
 Iterator<T> &Iterator<T>::operator--()
 {
-	// We can perform a check for the begin iterator (no left-child and is a left child)
-	// and throw an exception if found
+	// We could perform a check for the begin iterator (no left-child and is a left child)
+	// and throw an exception 
 	if (ptr->left) {
 		ptr = ptr->left;
 		move_it_rightmost(this);
@@ -290,8 +290,9 @@ However, the runtime of just iterating through the entire tree without performin
 
 # Conclusion
 
-Next up, we conclude the series by talking about additional features we can add and we can test how efficient the tree is by performing a benchmark against std::set.
+[Next](https://hiimkarl.github.io//Learning-AVL-Trees-4/) up, we conclude the series by talking about additional features we can add and we can test how efficient the tree is by performing a benchmark against std::set.
 
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 * [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
+* [AVL 4](https://hiimkarl.github.io//Learning-AVL-Trees-4/)

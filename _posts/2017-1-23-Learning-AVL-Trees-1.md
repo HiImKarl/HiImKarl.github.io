@@ -206,3 +206,4 @@ This concludes the first part of the tutorial. Up [next](https://hiimkarl.github
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 * [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
+* [AVL 4](https://hiimkarl.github.io//Learning-AVL-Trees-4/)

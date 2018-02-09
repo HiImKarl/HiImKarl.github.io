@@ -5,7 +5,7 @@ title: "AVL Trees -- 2/4: Erasing Nodes and Verification"
 
 # Erasing Nodes
 
-If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
+Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
 
 Also, we cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now, but a possible solution would be passing an option boolean reference that indicates whether the value was found or not.
  
@@ -29,6 +29,7 @@ Node<T> *Erase(Node<T> *root, typename Node<T>::value_type val)
 	if (!(*indirect)) return root; 
 	//...
 ```
+If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. 
 
 However, what if we are deleting a node in the middle of the tree? Then we need to find a node that we can _safely_ delete and that we can put in the place of the node we want to delete. To do so, we can either move to the left child (if it exists) and move right until there are no more right children, or move to the right and then move all the way to the left. 
 
@@ -184,10 +185,9 @@ bool IsTreeBalanced(Node<T> *root)
 
 ## Writing Unit Tests
 
-You can look at the unit tests in test.cc. They use the [catch framework](https://github.com/catchorg/Catch2). The tests are by no means extensive, but they are a good start. You can add your own tests and run them with:
+You can look at the unit tests in test.cc. They use the [catch framework](https://github.com/catchorg/Catch2). The tests are by no means extensive, but they are a good start. You can add more edge cases if you want and run them with:
 ```
 make test
-./test
 ```
 
 # Issues with our current tree
@@ -197,3 +197,4 @@ We would perhaps like to, as previously described, unify our find and erase func
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
 * [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-3/)
+* [AVL 3](https://hiimkarl.github.io//Learning-AVL-Trees-4/)
