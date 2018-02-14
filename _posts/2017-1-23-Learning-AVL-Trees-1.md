@@ -6,7 +6,9 @@ title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 # Introduction
 This is a beginner level guide for writing a basic implementation of an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
 
-You can download the full source code for the tutorial with git. I have tested the example on Linux, but OSX and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. Open a terminal and run this in the directory you want to put the code:
+You can download the full source code for the tutorial with git. I have tested the code on Linux, but OSX and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
+
+Open a terminal and run this in the directory you want to put the code:
 ```
 git clone git@github.com:HiImKarl/AVL-Trees.git
 ```
