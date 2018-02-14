@@ -15,6 +15,7 @@ git clone git@github.com:HiImKarl/AVL-Trees.git
 1. Basic knowledge of C++ (as long as you know C concepts, i.e. pointers, memory mangement, you will be fine).
 2. Basic knowledge of generic programming (C++ templates).
 3. Understanding of the properties of an AVL tree. There are many resources online that you can look at. I will point you to some of them over the course of the tutorial.
+4. I use some big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
 
 I am implementing the tree as a series of functions that are applied to the root node of the tree, mostly for code clarity.
 
