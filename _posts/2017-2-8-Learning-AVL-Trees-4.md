@@ -4,7 +4,6 @@ title: "AVL Trees -- 4/4: Addition Features and Benchmarking"
 ---
 
 # Reverse Iterator
-
 Our reverse iterator is identical to the forwards iterator, except that the increment and decrement operators are the reverse of the ones of the forwards iterator. The ```Begin``` function is also slightly different, here is what it looks like.
 
 ```cpp
@@ -19,18 +18,18 @@ ReverseIterator<T> RBegin(Node<T> *root)
 
 # Fancy typedefs
 
-It's useful to provide some easily accessible type names scoped from the ```Node``` class.
+It's useful to provide some easily accessible type names scoped in the ```Node``` class.
 
 ```cpp
 template <typename T>
 struct Node {
-	typedef T                 value_type;
-	typedef T&              reference;
-	typedef T&&               rv_reference;
-	typedef T const&          const_reference;
-	typedef Iterator<T>         iterator;
-	typedef Iterator<T const>       const_iterator;
-	typedef ReverseIterator<T>      reverse_iterator;
+	typedef T                         value_type;
+	typedef T&                        reference;
+	typedef T&&                       rv_reference;
+	typedef T const&                  const_reference;
+	typedef Iterator<T>               iterator;
+	typedef Iterator<T const>         const_iterator;
+	typedef ReverseIterator<T>        reverse_iterator;
 	typedef ReverseIterator<T const>  const_reverse_iterator;
 	// stuff...
 };
@@ -105,7 +104,7 @@ Uhhhhhhhhhhhhhhhh nothing to see here.
 ```
 ...
 
-Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much, and I don't **think** the compiler would optimize this loop away. 
+Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much(slight increase in runtime, but still no correlation between #nodes and runtime), and I don't *think* the compiler would optimize this loop away. 
 ```cpp
 // in STL benchmark func
 volatile ulong sum = 0;
@@ -114,20 +113,21 @@ for (;it != stl_set.end(); ++it) { sum += 1; }
 auto end = chrono::high_resolution_clock::now();
 ```
 
-In fact, the results of STL iteration is so fast, the times are probably smaller than the uncertainity with using ```high_resolution_clock```. So what happens if I time nothing?
+In fact, the results of STL iteration is so fast, the values are probably smaller than the uncertainity with using ```high_resolution_clock```. What happens if I time nothing?
 ```cpp
 auto start = chrono::high_resolution_clock::now();
 auto end = chrono::high_resolution_clock::now();
 cout <<  chrono::duration<double>(end - start).count() << "s\n";	
 ```
-
+```
 Result: 3.95e-07s
+```
 
-Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even __faster__ than e-7, but I don't know. I'm going to have to look at the disassembly, but not right now, beacuse I'll have to learn x86 first.
+Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even __faster__ than e-7, but I don't know. I'm going to have to look at the assembly, but not right now, beacuse I'll have to learn x86 first. If you do want to look at compiler output, [compiler explorer](https://godbolt.org/) is extremely convenient.
 
 # Conclusion
 
-That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the potential optimizations hinted at throughout the tutorial, or modify the design of the tree to make iteration faster. If you think this was actually interesting, leave a comment, and I'll continue implementing random data structures or algorithms. Thanks for reading.
+That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the optimizations hinted at throughout the tutorial, or modify the design of the tree to make iteration faster. If you think this was actually interesting, leave a comment, and I'll continue implementing random data structures or algorithms. Thanks for reading.
 
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)

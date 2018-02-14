@@ -4,10 +4,9 @@ title: "AVL Trees -- 2/4: Erasing Nodes and Verification"
 ---
 
 # Erasing Nodes
+Perhaps we would like to pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways (as we may need to rotate these nodes), and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
 
-Perhaps we would like it if we could pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways, and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
-
-Also, we cannot return NULL if a node with that value cannot be found, since if we delete the last node we must return a NULL for the empty tree. We will ignore the problem for now, but a possible solution would be passing an option boolean reference that indicates whether the value was found or not.
+Also, we cannot return ```NULL``` if a node with that value cannot be found, since if we delete the last node we must return a ```NULL``` for the empty tree. We will ignore this problem for now, but a possible solution would be passing an optional boolean reference that indicates whether the value was found (and deleted) or not.
  
 Finding the node to delete is fairly simple; we need to keep an array of parent pointers similar to ```insert()```.
 ```cpp
@@ -31,9 +30,9 @@ Node<T> *Erase(Node<T> *root, typename Node<T>::value_type val)
 ```
 If we are erasing a leaf node, it is intuitive to see that we would just need to traverse through its parents and correct their heights/apply rotations. 
 
-However, what if we are deleting a node in the middle of the tree? Then we need to find a node that we can _safely_ delete and that we can put in the place of the node we want to delete. To do so, we can either move to the left child (if it exists) and move right until there are no more right children, or move to the right and then move all the way to the left. 
+However, what if we are deleting a node in the middle of the tree? Then we need to find a node that we _can_ remove (a leaf node) and we use it to replace the node we want to delete. 
 
-This would find the largest node smaller than the node targeted for deletion, or the smallest node larger than the target node, and we can use this to replace the target node. We then delete the node we used to replace the target node instead.
+To do so, we can either move to the left child (if it exists) and move right until there are no more right children, or move to the right and then move all the way to the left. This would find the largest node smaller than the node targeted for deletion, or the smallest node larger than the target node. We then perform the replacement and delete our replacement node.
 
 ```cpp
 	//...
@@ -87,11 +86,11 @@ The last step is identical to the one in insertion, we need to update the height
 
 # Verification
 
-We will want to write some unit tests to make sure our AVL tree actually works.
+We will want to write some unit tests to make sure our AVL tree actually works. We will need to define some functions to check that our data fields and height fields are correct. 
 
 ## Traversal
 
-Let's first define the standard traversal functions so that we can at least do a cursory evaluation of the trees. We pass a container object that implements ```void push_back(typename Node<T>::value_type)``` (std::vector<T> and std::list<T> do this).
+Let's first define the standard traversal functions so that we can at least do a cursory evaluation of the trees. We pass a container object that implements ```void push_back(typename Node<T>::value_type)``` (Many of the STL containers, such as ```std::vector<T>``` and ```std::list<T>```, implement this function).
 
 ```cpp
 template <typename T, typename Container>
@@ -124,21 +123,21 @@ void PreOrderTraversal(Node<T> *root, Container &container)
 
 ## Visualizing the Tree
 
-Now we can pass an std::vector<T> to one of this functions and manually compare the output to some manually created trees. Since we probably don't want to actually draw them out, I have written a small function to help visualize trees. In the AVL directory of the source code, run the following: 
+Now we can pass an ```std::vector<T>``` to one of these functions and manually compare the output to some manually created trees. Since we probably don't want to actually draw them out, I have written a small command line tool to help visualize trees. In the AVL directory of the source code, run the following: 
 ```
 make display
 ./display
 ```
 
-Here is how to use it: A insert query is created by typing 'i' and then a series of space seperated integers to insert. i.e.
+An insert query is created by typing 'i' and then a series of space seperated integers to insert:
 ```
 i 23 -43 0 234 78
 ```
-A delete query is created by typing 'd' followed a series of space seperated integers to delete. i.e.
+A delete query is created by typing 'd' followed a series of space seperated integers to delete:
 ```
 e 23 78 34
 ```
-A display query is produced by inputing 'd', and inputing 'q' quits. Here is the output of an example:
+A display query is produced by inputing 'd', which prints the tree. Inputing 'q' exits the program. Here is the output of an example:
 ```
 i 23 -43 0 234 78
 e 23 78 34
@@ -188,6 +187,25 @@ bool IsTreeBalanced(Node<T> *root)
 You can look at the unit tests in test.cc. They use the [catch framework](https://github.com/catchorg/Catch2). The tests are by no means extensive, but they are a good start. You can add more edge cases if you want and run them with:
 ```
 make test
+```
+
+Here is an example of what one of the tests look like.
+
+```cpp
+TEST_CASE("Part1 Tree methods", "[AVL]") {
+	// tests...
+	SECTION("Insertion") {
+		vector<int> vec {}; 
+		vec.reserve(9050);
+		for (size_t i = 0; i < 50; ++i) 
+		  for (int j = -90; j <= 90; ++j) 
+			vec.push_back(j);
+		std::sort(vec.begin(), vec.end());
+		vector<int> inorder_traversal {}; 
+		InOrderTraversal(root, inorder_traversal);
+		REQUIRE(vec == inorder_traversal);
+	}
+	// more tests...
 ```
 
 # Issues with our current tree

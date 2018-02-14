@@ -13,10 +13,12 @@ git clone git@github.com:HiImKarl/AVL-Trees.git
 
 **Prerequisites**: 
 1. Basic knowledge of C++ (as long as you know C concepts, i.e. pointers, memory mangement, you will be fine).
-2. Basic knowledge of generic programming (especially C++ templates).
-3. Understanding of the properties of an AVL tree. There are many resources online that you can look at.
+2. Basic knowledge of generic programming (C++ templates).
+3. Understanding of the properties of an AVL tree. There are many resources online that you can look at. I will point you to some of them over the course of the tutorial.
 
-**Potential Optimization**: I am implementing the tree as a series of functions that are applied to the root node of the tree for code clarity. It may be better to create a tree class instead, so that you can provide a cleaner tree API to work with.
+I am implementing the tree as a series of functions that are applied to the root node of the tree, mostly for code clarity.
+
+**Potential Optimization**:  It may be better to create a tree class instead and hide logic so that you can provide a cleaner API.
 
 # Node Definition
 
@@ -36,7 +38,8 @@ struct Node {
 	size_t height;
 };
 ```
-For simplicity, we will be storing the height of tree instead of the balance factor. If memory is a concern, it is possible to store the BF using only two bits (though we would still be using a single byte). We define a leaf node's height to be 0.
+For simplicity, we will be storing the height of tree instead of the balance factor. We define a leaf node's height to be 0.
+ If memory is a concern, it is possible to store the BF using only two bits (though we would still be using a single byte). 
 
 **Potential Optimization**: The size\_t data type is often implemented as unsigned long. Given that the number of nodes is roughly 2<sup>height</sup>, can you imagine how large a tree would need to be to require height in that range?
 
@@ -48,8 +51,7 @@ template <typename T>
 size_t Height(Node<T> *root) 
 {
 	return root->height;
-}
-```
+} ```
 
 # Finding Nodes
 
@@ -100,9 +102,9 @@ Node<T> *Insert(Node<T> *root, typename Node<T>::value_type val)
 	//...
 ```
 
-We store pointers to the node pointers in the tree (which could be node-`>`left, node-`>`right, or root) since we will have to change their values in the case of rotations. 
+We store pointers to the node pointers in the tree (which could be `node->left`, `node->right`, or `root`) since we will have to change their values in the case of rotations. 
 
-Now, we have to traverse upwards from where we inserted the new node, update the height values, and perform rotations if necessary. We can bundle these two operations into one ```void check_for_rotations(Node<T> **node_ptr)``` function.
+Now, we have to traverse upwards from where we inserted the new node, update the height values, and perform rotations if necessary. We can bundle these two operations into one ```void check_for_rotations(Node<T> **node_ptr)``` method.
 
 ```cpp
 	// update the height of the tree, applying rotations if necessary
@@ -111,6 +113,7 @@ Now, we have to traverse upwards from where we inserted the new node, update the
 	return root;
 } // end of Insert()
 ```
+
 **Potential Optimization**: I have left out a check to see if the height of a parent node is actually changed, because if isn't changed, further traversal up the tree is unecessary.
 
 ## Updating height and performing rotations
@@ -169,7 +172,7 @@ void update_height(Node<T> *node)
 
 ## Rotations
 
-For the left rotation, the left child moves into the place of the head node, inheriting the head as its right child, and the head node inherits the left node's right subtree. Again, these [lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University are really helpful if you need to visualize this.
+For the left rotation, the left child moves into the place of the head node, inheriting the head as its right child, and the head node inherits the left node's right subtree. Again, these [lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University are really helpful if you want to visualize this.
 
 The right rotation is identical, except we are moving the right node into place of the head node, which inherits the right node's left subtree.
 ```cpp 
@@ -199,8 +202,6 @@ void right_left_rotation(Node<T> **head)
 	left_rotation(head);
 }
 ```
-
-# Conclusion
 
 This concludes the first part of the tutorial. Up [next](https://hiimkarl.github.io//Learning-AVL-Trees-2/), erasing nodes and verifying our tree works.
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
