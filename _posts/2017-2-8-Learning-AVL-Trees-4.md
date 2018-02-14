@@ -43,9 +43,9 @@ We will benchmark four methods:
 3. Deletion
 4. Iteration
 
-There are many tools/frameworks you could use to benchmark, we will simply time the code with the standard library ```high_precision_clock```. We can compare our AVL tree to the standard library ```set``` container, which is typically (but not always) implemented as a Red-Black tree. I am testing this on Ubuntu 16.04 with g++ 6.3, and no compiler optimization flags.
+There are many tools/frameworks you could use to benchmark, we will simply time the code with the STL ```high_precision_clock```. We can compare our AVL tree to ```std::set```, which is typically (but not always) implemented as a Red-Black tree. I am testing this on Ubuntu 16.04 with g++ 6.3, with no compiler optimization flags.
 
-If you don't know what a red black tree is, it supports the same methods with the same time complexity as an AVL tree, but usually AVL trees are faster at finding nodes and slower at inserting/deleting them. That is roughly how we should expect the performances to compare. That being said, it is highly probably certain optimizations/tradeoffs were made to ```std::set```, so our expectations will probably be wrong.
+If you don't know what a red black tree is, it supports the same methods with the same time complexity as an AVL tree, but usually AVL trees are faster at finding nodes and slower at inserting/deleting them. That is roughly how we should expect the performances to compare. That being said, it is almost certain that specific optimizations/tradeoffs were made to ```std::set```, so our expectations will probably be wrong.
 
 If you want to run the benchmarking code, cd into the root directory (/AVL) of the sample code and run:
 
@@ -104,7 +104,7 @@ Uhhhhhhhhhhhhhhhh nothing to see here.
 ```
 ...
 
-Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much(slight increase in runtime, but still no correlation between #nodes and runtime), and I don't *think* the compiler would optimize this loop away. 
+Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much(slight increase in runtime, but still no correlation between number of nodes and runtime), and I don't *think* the compiler would optimize this loop away. 
 ```cpp
 // in STL benchmark func
 volatile ulong sum = 0;
@@ -127,7 +127,7 @@ Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even 
 
 # Conclusion
 
-That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the optimizations hinted at throughout the tutorial, or modify the design of the tree to make iteration faster. If you think this was actually interesting, leave a comment, and I'll continue implementing random data structures or algorithms. Thanks for reading.
+That's basically it for AVL trees. If you want to challenge yourself, see if you can implement the optimizations hinted at through out the tutorial, or modify the design of the tree to make iteration faster. If you think this was actually interesting, or if I made a mistake somewhere, leave a comment (or don't because I haven't set that up yet), and I'll continue implementing random data structures or algorithms. Thanks for reading.
 
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)
