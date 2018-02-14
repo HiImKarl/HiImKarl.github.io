@@ -120,7 +120,7 @@ Now, we have to traverse upwards from where we inserted the new node, update the
 
 **Potential Optimization**: I have left out a check to see if the height of a parent node is actually changed, because if isn't changed, further traversal up the tree is unecessary.
 
-## Updating height and performing rotations
+## Performing Rotations
 
 We perform rotations if the balance factor of any node becomes -2 or 2, keeping in mind that the tree can only become unbalanced by 1 before we correct it. Here are nice [lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University to help you visualize what rotations are necessary. 
 
@@ -148,7 +148,7 @@ void check_for_rotations(Node<T> **node_ptr)
 }
 ```
 
-## Getting the balance factor
+## Getting the Balance Factor
 We defined the BF as the right child's height subtracted by the left.
 
 ```cpp
