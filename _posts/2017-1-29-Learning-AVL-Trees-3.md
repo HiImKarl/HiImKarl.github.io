@@ -14,10 +14,10 @@ struct Node {
 		: value(value), left(nullptr), right(nullptr), parent(nullptr), height(0) 
 		{}
 	value_type value;
-	size_t height;
 	Node *left;
 	Node *right;
 	Node *parent;
+	size_t height;
 };
 ```
 
@@ -183,7 +183,7 @@ Iterator<T> Begin(Node<T> *root)
 // Get the ending iterator, the parameter doesn't do anything 
 // except provide type information
 template <typename T>
-Iterator<T> End(Node<T> *root)
+Iterator<T> End(Node<T> *)
 {
 	return Iterator<T> {nullptr};
 }

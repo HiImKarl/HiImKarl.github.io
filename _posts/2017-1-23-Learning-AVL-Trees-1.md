@@ -4,9 +4,9 @@ title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 ---
 
 # Introduction
-This is a beginner level guide for writing a basic implementation of an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
+This is a beginner level guide for writing a basic implementation of an AVL tree in C++. All of the functionality of the tree will be contained in a single header file. I will assume that the reader is at least somewhat familiar with AVL trees.
 
-You can download the full source code for the tutorial with git. I have tested the code on Linux, but OSX and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
+You can download the full source code for the tutorial with git. I have tested the code on Linux, but macOS and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
 
 Open a terminal and run this in the directory you want to put the code:
 ```
@@ -14,14 +14,14 @@ git clone git@github.com:HiImKarl/AVL-Trees.git
 ```
 
 **Prerequisites**: 
-1. Basic knowledge of C++ (as long as you know C concepts, i.e. pointers, memory mangement, you will be fine).
+1. Basic C++, and more importantly good C knowledge, i.e. pointers, memory mangement.
 2. Basic knowledge of generic programming (C++ templates).
 3. Understanding of the properties of an AVL tree. There are many resources online that you can look at. I will point you to some of them over the course of the tutorial.
-4. I use some big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
+4. I use a bit of big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
 
-I am implementing the tree as a series of functions that are applied to the root node of the tree, mostly for code clarity.
+I will implement the tree as a series of functions that will be passed the root node of the tree, mostly for code clarity.
 
-**Potential Optimization**:  It may be better to create a tree class instead and hide logic so that you can provide a cleaner API.
+**Potential Optimization**:  It would be better to create a tree class instead and hide logic so that you can provide a cleaner API.
 
 # Node Definition
 
@@ -59,7 +59,7 @@ size_t Height(Node<T> *root)
 
 # Finding Nodes
 
-Since the tree is ordered, walking through the tree and finding nodes is also quite simple. The height of the tree is O(log(n)), so ```Find``` in the worst case (finding a leaf node) takes time proportional to log(n). We will return a nullptr if the node cannot be found.
+The tree is ordered, so walking through the tree and finding nodes is also quite simple. The height of the tree is O(log(n)), and in the worst case (finding a leaf node) ```Find``` will take time proportional to log(n). We will return a nullptr if the node cannot be found.
 
 ```cpp
 template <typename T>
