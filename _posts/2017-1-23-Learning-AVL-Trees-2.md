@@ -210,7 +210,7 @@ TEST_CASE("Part1 Tree methods", "[AVL]") {
 
 # Issues with our current tree
 
-We would perhaps like to, as previously described, unify our find and erase functions, implement iterators, and perhaps use O(1) memory in insert/find/erase operations. We cannot do this with our current tree structure, we will need to be able to traverse up the tree. Let's do that [next](https://hiimkarl.github.io//Learning-AVL-Trees-3/).
+We would perhaps like to, as previously described, unify our find and erase functions, and allow iteration through the tree. We cannot do this with our current tree structure, as we will need to be able to traverse up the tree. Let's do that [next](https://hiimkarl.github.io//Learning-AVL-Trees-3/).
 
 * [AVL 1](https://hiimkarl.github.io//Learning-AVL-Trees-1/)
 * [AVL 2](https://hiimkarl.github.io//Learning-AVL-Trees-2/)

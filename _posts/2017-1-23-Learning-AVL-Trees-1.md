@@ -4,9 +4,9 @@ title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 ---
 
 # Introduction
-This is a beginner level guide for writing a basic implementation of an AVL tree. I will assume that the reader is familiar with AVL trees, their properties, what rotations may be required, etc. 
+This is a beginner level guide for writing a basic implementation of an AVL tree in C++. All of the functionality of the tree will be contained in a single header file. I will assume that the reader is at least somewhat familiar with AVL trees.
 
-You can download the full source code for the tutorial with git. I have tested the code on Linux, but OSX and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
+You can download the full source code for the tutorial with git. I have tested the code on Linux, but macOS and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
 
 Open a terminal and run this in the directory you want to put the code:
 ```
@@ -14,14 +14,14 @@ git clone git@github.com:HiImKarl/AVL-Trees.git
 ```
 
 **Prerequisites**: 
-1. Basic knowledge of C++ (as long as you know C concepts, i.e. pointers, memory mangement, you will be fine).
+1. Basic C++, and more importantly good C knowledge, i.e. pointers, memory mangement.
 2. Basic knowledge of generic programming (C++ templates).
 3. Understanding of the properties of an AVL tree. There are many resources online that you can look at. I will point you to some of them over the course of the tutorial.
-4. I use some big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
+4. I use a bit of big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
 
-I am implementing the tree as a series of functions that are applied to the root node of the tree, mostly for code clarity.
+I will implement the tree as a series of functions that will be passed the root node of the tree, mostly for code clarity.
 
-**Potential Optimization**:  It may be better to create a tree class instead and hide logic so that you can provide a cleaner API.
+**Potential Optimization**:  It would be better to create a tree class instead and hide logic so that you can provide a cleaner API.
 
 # Node Definition
 
@@ -48,17 +48,18 @@ For simplicity, we will be storing the height of tree instead of the balance fac
 
 # Tree Height
 
-Since we are already storing the height of each node, this is a trivial function. Runtime is obviously O(1).
+Since we are already storing the height of each node, this is a trivial function. 
 ```cpp
 template <typename T>
 size_t Height(Node<T> *root) 
 {
 	return root->height;
-} ```
+}
+ ```
 
 # Finding Nodes
 
-Walking through the tree and finding nodes is simple. Since the height of the tree is O(log(n)), this find function takes time O(log(n)). We will return a nullptr if the node cannot be found.
+The tree is ordered, so walking through the tree and finding nodes is also quite simple. The height of the tree is O(log(n)), and in the worst case (finding a leaf node) ```Find``` will take time proportional to log(n). We will return a nullptr if the node cannot be found.
 
 ```cpp
 template <typename T>
@@ -76,7 +77,7 @@ Node<T> *Find(Node<T> *root, typename Node<T>::value_type val)
 
 # Tree Insertion
 
-This function is a little bit more complicated. We want to take in a pointer to the root of the tree, as well as a value item to insert. Since the root of the tree may be rotated, it is necessary to return the (possibly different) root of the tree after the insertion. This function also takes time equivalent to O(log(n)).
+This function is a little bit more complicated. We want to take in a pointer to the root of the tree, as well as a value item to insert. Since the root of the tree may be rotated, it is necessary to return the (possibly different) root of the tree after the insertion. Since at most one rotation needs to be performed (in O(1)), this function takes time proportional to O(log(n)).
 
 The first thing that we have to do is figure out where the new node should be placed. However, we will also need to keep track of each node we go through to find that place, because we may need to rotate them.
 
@@ -119,7 +120,7 @@ Now, we have to traverse upwards from where we inserted the new node, update the
 
 **Potential Optimization**: I have left out a check to see if the height of a parent node is actually changed, because if isn't changed, further traversal up the tree is unecessary.
 
-## Updating height and performing rotations
+## Performing Rotations
 
 We perform rotations if the balance factor of any node becomes -2 or 2, keeping in mind that the tree can only become unbalanced by 1 before we correct it. Here are nice [lecture slides](https://courses.cs.washington.edu/courses/cse373/06sp/handouts/lecture12.pdf) from Washington University to help you visualize what rotations are necessary. 
 
@@ -147,7 +148,7 @@ void check_for_rotations(Node<T> **node_ptr)
 }
 ```
 
-## Getting the balance factor
+## Getting the Balance Factor
 We defined the BF as the right child's height subtracted by the left.
 
 ```cpp
