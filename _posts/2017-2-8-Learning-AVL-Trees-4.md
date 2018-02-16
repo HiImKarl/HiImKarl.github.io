@@ -104,7 +104,10 @@ Uhhhhhhhhhhhhhhhh nothing to see here.
 ```
 ...
 
-Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much(slight increase in runtime, but still no correlation between number of nodes and runtime), and I don't *think* the compiler would optimize this loop away. 
+Wait, the STL times aren't changing. Is the compiler optimizing the loop away? When I change the benchmark function, to the code below, the results don't change much (slight increase in runtime, but still no correlation between number of nodes and runtime).
+
+I don't *think* the compiler would optimize this loop away:
+
 ```cpp
 // in STL benchmark func
 volatile ulong sum = 0;
@@ -113,7 +116,7 @@ for (;it != stl_set.end(); ++it) { sum += 1; }
 auto end = chrono::high_resolution_clock::now();
 ```
 
-In fact, the results of STL iteration is so fast, the values are probably smaller than the uncertainity with using ```high_resolution_clock```. What happens if I time nothing?
+In fact, the results of STL iteration is so fast, the values are probably smaller than the uncertainity of ```high_resolution_clock```. What happens if I time nothing?
 ```cpp
 auto start = chrono::high_resolution_clock::now();
 auto end = chrono::high_resolution_clock::now();
@@ -123,7 +126,7 @@ cout <<  chrono::duration<double>(end - start).count() << "s\n";
 Result: 3.95e-07s
 ```
 
-Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even __faster__ than e-7, but I don't know. I'm going to have to look at the assembly, but not right now, beacuse I'll have to learn x86 first. If you do want to look at compiler output, [compiler explorer](https://godbolt.org/) is extremely convenient.
+Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even _faster_ than e-7, or the compiler may still be optmizing the loop away. I'd have to go have a look at the assembly. 
 
 # Conclusion
 
