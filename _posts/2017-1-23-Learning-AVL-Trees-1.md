@@ -8,14 +8,15 @@ This is a beginner level guide for writing a basic implementation of an AVL tree
 
 You can download the full source code for the tutorial with git. I have tested the code on Linux, but macOS and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 
 
-Open a terminal and run this in the directory you want to put the code:
+Open a terminal and run this in the directory you want to put the code and go to the directory for part1 (you will need to have [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed):
 ```
 git clone git@github.com:HiImKarl/AVL-Trees.git
+cd /part1
 ```
 
 **Prerequisites**: 
-1. Basic C++, and more importantly good C knowledge, i.e. pointers, memory mangement.
-2. Basic knowledge of generic programming (C++ templates).
+1. Knowledge of C programming fundementals, i.e. pointers, explicit memory mangement.
+2. Basic knowledge of C++ templates and synatx.
 3. Understanding of the properties of an AVL tree. There are many resources online that you can look at. I will point you to some of them over the course of the tutorial.
 4. I use a bit of big-O asymptotic worst-case notation throughout but honestly you can just skip those parts if you don't understand it.
 

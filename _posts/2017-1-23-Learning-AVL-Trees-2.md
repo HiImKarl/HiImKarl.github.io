@@ -90,7 +90,7 @@ We will want to write some unit tests to make sure our AVL tree actually works. 
 
 ## Traversal
 
-Let's first define the standard traversal functions so that we can at least do a cursory evaluation of the trees. We pass a container object that implements ```void push_back(typename Node<T>::value_type)``` (Many of the STL containers, such as ```std::vector<T>``` and ```std::list<T>```, implement this function).
+Let's first define the standard traversal functions so that we can at least do a cursory evaluation of the trees. We pass a container object that implements ```void push_back(typename Node<T>::value_type)``` (Many of the STL containers, such as ```std::vector<T>``` and ```std::list<T>```, implement this function). If you need a refresher on recursion, I learned it from articles like [this one from IBM](https://www.hackerearth.com/practice/basic-programming/recursion/recursion-and-backtracking/tutorial/).
 
 ```cpp
 template <typename T, typename Container>
@@ -123,7 +123,7 @@ void PreOrderTraversal(Node<T> *root, Container &container)
 
 ## Visualizing the Tree
 
-Now we can pass an ```std::vector<T>``` to one of these functions and manually compare the output to some manually created trees. Since we probably don't want to actually draw them out, I have written a small command line tool to help visualize trees. In the AVL directory of the source code, run the following: 
+Now we can pass an ```std::vector<T>``` to one of these functions and manually compare the output to some manually created trees. I have written a small command line tool to help visualize trees. In the AVL directory of the source code, run the following: 
 ```
 make display
 ./display
@@ -150,9 +150,12 @@ d
 q
 ```
 
+This tool can only do a cursory analysis on smaller trees. We will need to define more verification functions.
+
 ## Checking Height and BF
 
-Let's write a function that traverses the tree and checks to make sure heights are correct.
+Let's write a recursive function that traverses the tree and checks to make sure heights are correct.
+
 ```cpp
 // updates heights as it moves along
 // returns true if heights are correct

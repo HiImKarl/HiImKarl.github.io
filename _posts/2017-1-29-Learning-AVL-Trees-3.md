@@ -2,6 +2,11 @@
 layout: single
 title: "AVL Trees -- 3/4: Allowing Upwards Traversal"
 ---
+# Code location
+To find code for the second half of this tutorial, go to the part2 directory, located in the root directory of the project:
+```
+cd part2/
+```
 
 # Parent Pointer
 We can add a pointer to our node's parent. The root node's parent pointer will point to ```NULL```. Here's our new node definition:
@@ -35,7 +40,6 @@ Node<T> *Insert(Node<T> *root, typename Node<T>::value_type val)
 	if (!root) return new_node;
 
 	// find out where to put the new node
-	// keep track of the route moved into the tree
 	Node<T> **indirect = &root;
 	while (*indirect) {
 		// update the parent of the new_node
@@ -77,7 +81,7 @@ Node<T> **pointer_to_node(Node<T> *node)
 
 As you might imagine, the ```Node<T> Find(typename Node<T>::value_type val)``` remains unchanged. However, we can now pass a pointer to the node we want to erase, allowing us to use ```Node<T> Find(typename Node<T>::value_type val)``` to find a node for the value we want to delete, and verify that it exists, before passing it to erase.
 
-We will define a function called ```void delete_replacement(Node<T> **replacement, Node<T> *dangling_branch)``` to clean up the (replacement) node we are removing. Notice that we have to pass it the dangling branch since it may be the left/right child, depending on which way we walked to find the replacement.
+We will define a function called ```void delete_replacement(Node<T> **replacement, Node<T> *dangling_branch)``` to clean up the (replacement) node we are removing. Notice that we have to pass it the dangling branch since it may be either the left or the right child, depending on which way we walked to find the replacement.
 
 ```cpp
 template <typename T>
@@ -123,7 +127,7 @@ Node<T> *Erase(Node<T> *target)
 }
 ```
 
-This is what our ```delete_replacement``` function looks like. Notice that it updates the address of the node to point at its parent.
+This is what our ```delete_replacement``` function looks like. It also updates the address of the node to point at its parent.
 
 ```cpp
 template <typename T>
@@ -222,7 +226,7 @@ template <typename T>
 Iterator<T> &Iterator<T>::operator++()
 {
 	// We could perform a check here for the end iterator (ptr is NULL)
-	// and throw an exception 
+	// and throw an exception here
 	if (ptr->right) {
 		ptr = ptr->right;
 		move_it_leftmost(this);
@@ -276,8 +280,8 @@ The decrement operator does exactly the opposite of what the increment operator 
 template <typename T>
 Iterator<T> &Iterator<T>::operator--()
 {
-	// We could perform a check for the begin iterator (no left-child and is a left child)
-	// and throw an exception 
+	// We could perform a check for the begin iterator 
+	// and throw an exception here
 	if (ptr->left) {
 		ptr = ptr->left;
 		move_it_rightmost(this);

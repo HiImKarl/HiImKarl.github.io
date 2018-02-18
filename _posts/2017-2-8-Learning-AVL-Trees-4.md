@@ -126,7 +126,7 @@ cout <<  chrono::duration<double>(end - start).count() << "s\n";
 Result: 3.95e-07s
 ```
 
-Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even _faster_ than e-7, or the compiler may still be optmizing the loop away. I'd have to go have a look at the assembly. 
+Hmm, I'm not sure what to make of this. It could be that ```std::set``` is even _faster_ than e-7 (certainly possible), or the compiler may still be optmizing the loop away. I'd have to (learn x86) and go have a look at the assembly. 
 
 # Conclusion
 
