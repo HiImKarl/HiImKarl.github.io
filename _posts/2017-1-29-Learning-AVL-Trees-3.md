@@ -2,6 +2,9 @@
 layout: single
 title: "AVL Trees -- 3/4: Allowing Upwards Traversal"
 ---
+
+In the previous tutorial, we discovered some issues with constructing a method of iteration over the tree, based on how we designed the nodes. Now, let's add an additional node property to make things easier.  
+
 # Code location
 To find code for the second half of this tutorial, go to the part2 directory, located in the root directory of the project:
 ```
@@ -9,7 +12,7 @@ cd part2/
 ```
 
 # Parent Pointer
-We can add a pointer to our node's parent. The root node's parent pointer will point to ```NULL```. Here's our new node definition:
+To solve our iteration problem, we can simply add a pointer to our node's parent. This will give us direct access should we need to jump back to the parent. We will know when we meet the end of the tree because the root node's parent pointer will point to ```NULL```. Here's our new node definition:
 
 ```cpp
 template <typename T>

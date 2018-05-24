@@ -3,6 +3,8 @@ layout: single
 title: "AVL Trees -- 2/4: Erasing Nodes and Verification"
 ---
 
+We will continue directly from where we last came off, completing the functionality for the tree.
+
 # Erasing Nodes
 Perhaps we would like to pass a node pointer as the argument to delete, but we would have to traverse the tree to find the node again anyways (as we may need to rotate these nodes), and that would just result in an extraneous call to ```Find()```. Instead, we will again pass an argument of ```value_type```.
 

@@ -3,7 +3,6 @@ layout: single
 title: "AVL Trees -- 1/4: Tree Definition and Insertion"
 ---
 
-# Introduction
 This is a beginner level guide for writing a basic implementation of an AVL tree in C++. All of the functionality of the tree will be contained in a single header file. I will assume that the reader is at least somewhat familiar with AVL trees.
 
 You can download the full source code for the tutorial with git. I have tested the code on Linux, but macOS and Cygwin should be fine too. You will have to modify the makefile if you want to build it with MSVC. 

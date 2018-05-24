@@ -3,6 +3,8 @@ layout: single
 title: "AVL Trees -- 4/4: Addition Features and Benchmarking"
 ---
 
+It is important to benchmark our code, especially general purpose algorithms and data structures. But first, some remarks about QoL features.
+
 # Reverse Iterator
 Our reverse iterator is identical to the forwards iterator, except that the increment and decrement operators are the reverse of the ones of the forwards iterator. The ```Begin``` function is also slightly different, here is what it looks like.
 
